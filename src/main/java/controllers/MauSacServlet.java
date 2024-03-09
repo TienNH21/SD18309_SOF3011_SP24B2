@@ -1,5 +1,6 @@
 package controllers;
 
+import entities.MauSac;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,6 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet({
     "/mau-sac/create",  // GET
@@ -17,13 +20,12 @@ import java.io.IOException;
     "/mau-sac/index",   // GET
 })
 public class MauSacServlet extends HttpServlet {
+    List<MauSac> ds = new ArrayList<>();
+
     public void doGet(
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException, ServletException {
-//        request.getRequestDispatcher("/views/login.jsp")
-//                .forward(request, response);
-
         String uri = request.getRequestURI();
         System.out.println(uri);
         if (uri.contains("create")) {
@@ -63,14 +65,20 @@ public class MauSacServlet extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException, ServletException {
-        //
+        request.getRequestDispatcher("/views/mau_sac/create.jsp")
+                .forward(request, response);
     }
 
     public void store(
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException, ServletException {
-        //
+        String ma = request.getParameter("ma");
+        String ten = request.getParameter("ten");
+        String ttString = request.getParameter("trangThai");
+        int trangThai = Integer.parseInt(ttString);
+        MauSac ms = new MauSac(null, ma, ten, trangThai);
+        this.ds.add(ms);
     }
 
     public void edit(
