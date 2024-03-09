@@ -22,6 +22,13 @@ import java.util.List;
 public class MauSacServlet extends HttpServlet {
     List<MauSac> ds = new ArrayList<>();
 
+    public MauSacServlet()
+    {
+        this.ds.add(new MauSac(null, "1", "Vàng", 1));
+        this.ds.add(new MauSac(null, "2", "Xanh lá", 1));
+        this.ds.add(new MauSac(null, "3", "Đen", 0));
+    }
+
     public void doGet(
             HttpServletRequest request,
             HttpServletResponse response
@@ -58,7 +65,9 @@ public class MauSacServlet extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException, ServletException {
-        //
+        request.setAttribute("data", this.ds);
+        request.getRequestDispatcher("/views/mau_sac/index.jsp")
+            .forward(request, response);
     }
 
     public void create(
