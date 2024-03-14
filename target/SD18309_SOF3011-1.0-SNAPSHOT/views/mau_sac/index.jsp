@@ -30,10 +30,10 @@
             <td>${ ms.ten }</td>
             <td>${ ms.trangThai }</td>
             <td>
-                <a href="#">Update</a>
+                <a href="/SD18309_SOF3011_war_exploded/mau-sac/edit?ma=${ms.ma}">Update</a>
             </td>
             <td>
-                <a href="#">Delete</a>
+                <a href="/SD18309_SOF3011_war_exploded/mau-sac/delete?ma=${ms.ma}">Delete</a>
             </td>
         </tr>
     </c:forEach>

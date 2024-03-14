@@ -88,26 +88,57 @@ public class MauSacServlet extends HttpServlet {
         int trangThai = Integer.parseInt(ttString);
         MauSac ms = new MauSac(null, ma, ten, trangThai);
         this.ds.add(ms);
+        response.sendRedirect("/SD18309_SOF3011_war_exploded/mau-sac/index");
     }
 
     public void edit(
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException, ServletException {
-        //
+        String ma = request.getParameter("ma");
+        for (int i = 0; i < this.ds.size(); i++) {
+            MauSac ms = this.ds.get(i);
+            if (ms.getMa().equals( ma )) {
+                request.setAttribute("ms", ms);
+            }
+        }
+
+        request.getRequestDispatcher("/views/mau_sac/edit.jsp")
+            .forward(request, response);
     }
 
     public void update(
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException, ServletException {
-        //
+        String ma = request.getParameter("ma");
+        String ten = request.getParameter("ten");
+        String ttString = request.getParameter("trangThai");
+        int trangThai = Integer.parseInt(ttString);
+        MauSac ms = new MauSac(null, ma, ten, trangThai);
+        for (int i = 0; i < this.ds.size(); i++) {
+            MauSac color = this.ds.get(i);
+            if (color.getMa().equals( ma )) {
+                this.ds.set(i, ms);
+            }
+        }
+
+        response.sendRedirect("/SD18309_SOF3011_war_exploded/mau-sac/index");
     }
 
     public void delete(
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException, ServletException {
-        //
+        System.out.println("MauSacServlet@delete()");
+        String ma = request.getParameter("ma");
+        for (int i = 0; i < this.ds.size(); i++) {
+            MauSac color = this.ds.get(i);
+            if (color.getMa().equals( ma )) {
+                this.ds.remove(i);
+            }
+        }
+
+        response.sendRedirect("/SD18309_SOF3011_war_exploded/mau-sac/index");
     }
 }
