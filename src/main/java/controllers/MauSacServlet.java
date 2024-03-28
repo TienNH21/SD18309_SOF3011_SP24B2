@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.beanutils.BeanUtils;
 import repositories.MauSacRepository;
 
 import java.io.IOException;
@@ -81,11 +82,19 @@ public class MauSacServlet extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException, ServletException {
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        String ttString = request.getParameter("trangThai");
-        int trangThai = Integer.parseInt(ttString);
-        MauSac ms = new MauSac(null, ma, ten, trangThai);
+//        String ma = request.getParameter("ma");
+//        String ten = request.getParameter("ten");
+//        String ttString = request.getParameter("trangThai");
+//        int trangThai = Integer.parseInt(ttString);
+//        MauSac ms = new MauSac(null, ma, ten, trangThai);
+        MauSac ms = new MauSac();
+
+        try {
+            BeanUtils.populate(ms, request.getParameterMap());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         this.msRepo.insert(ms);
         response.sendRedirect("/SD18309_SOF3011_war_exploded/mau-sac/index");
     }
