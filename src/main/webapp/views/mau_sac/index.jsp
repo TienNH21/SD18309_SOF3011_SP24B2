@@ -25,15 +25,15 @@
     <tbody>
     <c:forEach items="${ data }" var="ms">
         <tr>
-            <td>1</td>
+            <td>${ ms.id }</td>
             <td>${ ms.ma }</td>
             <td>${ ms.ten }</td>
             <td>${ ms.trangThai }</td>
             <td>
-                <a href="/SD18309_SOF3011_war_exploded/mau-sac/edit?ma=${ms.ma}">Update</a>
+                <a href="/SD18309_SOF3011_war_exploded/mau-sac/edit?id=${ms.id}">Update</a>
             </td>
             <td>
-                <a href="/SD18309_SOF3011_war_exploded/mau-sac/delete?ma=${ms.ma}">Delete</a>
+                <a href="/SD18309_SOF3011_war_exploded/mau-sac/delete?id=${ms.id}">Delete</a>
             </td>
         </tr>
     </c:forEach>
